@@ -6,9 +6,9 @@ const app = express();
 const port = 3000;
 
 // Importa las rutas de tu API
-const registroRouter = require('./API/registroRouter');
-const loginAPI = require('./API/loginAPI');
-const registroForm = require('./API/registroForm');
+const registroRouter = require('../Backend/API/registroRouter');
+const loginAPI = require('../Backend/API/loginAPi');
+const registroForm = require('../Backend/API/registroForm');
 // Conexión a la base de datos de PostgreSQL
 const pool = new Pool({
   host: process.env.HOST_DB,
