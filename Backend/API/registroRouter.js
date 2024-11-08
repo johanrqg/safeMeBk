@@ -13,7 +13,7 @@ module.exports = (connection) => {
     }
 
     // Consulta SQL para insertar un nuevo usuario con los datos proporcionados
-    const insertQuery = 'INSERT INTO usuarios (dpi, nombre, apellido, email, "password") VALUES (?, ?, ?, ?, ?)';
+    const insertQuery = 'INSERT INTO usuarios (dpi, nombre, apellido, email, "password") VALUES ($1, $2, $3, $4, $5)';
     const valores = [dpi, nombre, apellido, email, password];
 
     connection.query(insertQuery, valores, (err, result) => {
