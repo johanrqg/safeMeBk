@@ -4,17 +4,17 @@ const router = express.Router();
 module.exports = (connection) => {
   // Ruta para el registro de usuarios
   router.post('/registro', (req, res) => {
-    // Obtén el DPI enviado desde la aplicación móvil
-    const { dpi } = req.body;
+    // Obtén los datos enviados desde la aplicación móvil
+    const { dpi, nombre, apellido, email, password } = req.body;
 
     // Realiza la validación de datos del DPI
-    if (esDPIValido(dpi)) {
-      return res.status(400).json({ message: 'DPI no válido'  + dpi });
+    if (!esDPIValido(dpi)) {
+      return res.status(400).json({ message: 'DPI no válido: ' + dpi });
     }
 
-    // Realiza una consulta SQL para insertar el nuevo usuario en la base de datos
-    const insertQuery = 'INSERT INTO usuarios (dpi) VALUES (?)';
-    const valores = [dpi];
+    // Consulta SQL para insertar un nuevo usuario con los datos proporcionados
+    const insertQuery = 'INSERT INTO usuarios (dpi, nombre, apellido, email, "password") VALUES (?, ?, ?, ?, ?)';
+    const valores = [dpi, nombre, apellido, email, password];
 
     connection.query(insertQuery, valores, (err, result) => {
       if (err) {
